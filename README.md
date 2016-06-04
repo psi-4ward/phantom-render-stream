@@ -59,7 +59,7 @@ var render = phantom({
   retries     : 1,           // How many times to try a render before giving up. Defaults to 1.
   phantomFlags: ['--ignore-ssl-errors=true'] // Defaults to []. Command line flags passed to PhantomJS
   maxRenders  : 500,         // How many renders can a phantom process make before being restarted. Defaults to 500
-  listener    : '0.0.0.0',   // Specify the interface to bind (ie 127.0.0.1) 
+  listener    : '0.0.0.0',   // Specify the interface to bind (ie 127.0.0.1),
 
   injectJs    : ['./includes/my-polyfill.js'] // Array of paths to polyfill components or external scripts that will be injected when the page is initialized
 });
@@ -170,6 +170,17 @@ For security reasons it could be necessary to disable javascript:
 ```javascript
 var phantom = render({
   javascriptEnabled: false
+});
+```
+
+## Request whitelist
+For security reasons you probably would filter the outgoing requests:
+
+```javascript
+var phantom = render({
+  requestWhitelist: [
+    '^http://localhost/assets/.*'
+  ]
 });
 ```
 
